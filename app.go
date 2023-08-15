@@ -21,7 +21,12 @@ func main() {
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		println("Request received")
+		t.Execute(w, "")
+	})
+
+	http.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"message": "Hello World"}`))
 	})
 
 	fs := http.FileServer(http.FS(assets))
