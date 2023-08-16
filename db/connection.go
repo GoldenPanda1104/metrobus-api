@@ -10,7 +10,7 @@ import (
 // DSN hace referencia a Database string
 
 // Remote DB
-var dsn = "host=ep-misty-morning-21300543.us-east-2.aws.neon.tech user=fl0user password=BtYGCsu1aj6O dbname=metrobusdev port=5432 sslmode=require"
+var dsn = "postgres://fl0user:BtYGCsu1aj6O@ep-misty-morning-21300543.us-east-2.aws.neon.tech:5432/metrobusdev?sslmode=require"
 
 // Local DB
 // var dsn = "host=localhost user=admin password=admin dbname=metrobus_dev port=5432"
