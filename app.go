@@ -1,36 +1,22 @@
 package main
 
 import (
-	"embed"
-	"html/template"
+	"github.com/GoldenPanda1104/metrobus-api/routes"
+	"github.com/gorilla/mux"
 	"net/http"
-	"os"
 )
 
-//go:embed templates/*
-var templates embed.FS
-var t = template.Must(template.ParseFS(templates, "templates/*"))
-
-//go:embed static/*
-var assets embed.FS
-
 func main() {
-	port := "3000"
-	if os.Getenv("PORT") != "" {
-		port = os.Getenv("PORT")
-	}
+	// port := "3000"
+	// if os.Getenv("PORT") != "" {
+	// 	port = os.Getenv("PORT")
+	// }
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		t.Execute(w, "")
-	})
+	router := mux.NewRouter()
 
-	http.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte(`{"message": "Hello World"}`))
-	})
+	//En este caso, el parametro w hace referencia al ResponseWriter y el parametro r hace referencia al Request(Reader)
+	router.HandleFunc("/", routes.HomeHandler)
 
-	fs := http.FileServer(http.FS(assets))
-	http.Handle("/static/", fs)
+	http.ListenAndServe(":3000", router)
 
-	http.ListenAndServe(":"+port, nil)
 }
