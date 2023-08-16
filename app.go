@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
 
@@ -29,6 +30,7 @@ func main() {
 	router.HandleFunc("/users", routes.PostUserHandler).Methods("POST")
 	router.HandleFunc("/users", routes.DeleteUserHandler).Methods("DELETE")
 
-	http.ListenAndServe(port, router)
+	log.Print("Application listening on port " + port)
+	http.ListenAndServe(":"+port, router)
 
 }
