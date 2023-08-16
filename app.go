@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/GoldenPanda1104/metrobus-api/db"
+	"github.com/GoldenPanda1104/metrobus-api/models"
 	"github.com/GoldenPanda1104/metrobus-api/routes"
 	"github.com/gorilla/mux"
 )
@@ -18,8 +19,8 @@ func main() {
 
 	db.DBConnection()
 
-	//db.DB.AutoMigrate(models.User{})
-	//db.DB.AutoMigrate(models.Card{})
+	db.DB.AutoMigrate(models.User{})
+	db.DB.AutoMigrate(models.Card{})
 
 	router := mux.NewRouter()
 
