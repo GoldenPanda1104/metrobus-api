@@ -1,18 +1,20 @@
 package main
 
 import (
+	"net/http"
+	"os"
+
 	"github.com/GoldenPanda1104/metrobus-api/db"
 	"github.com/GoldenPanda1104/metrobus-api/models"
 	"github.com/GoldenPanda1104/metrobus-api/routes"
 	"github.com/gorilla/mux"
-	"net/http"
 )
 
 func main() {
-	// port := "3000"
-	// if os.Getenv("PORT") != "" {
-	// 	port = os.Getenv("PORT")
-	// }
+	port := "3000"
+	if os.Getenv("PORT") != "" {
+		port = os.Getenv("PORT")
+	}
 
 	db.DBConnection()
 
@@ -28,6 +30,6 @@ func main() {
 	router.HandleFunc("/users", routes.PostUserHandler).Methods("POST")
 	router.HandleFunc("/users", routes.DeleteUserHandler).Methods("DELETE")
 
-	http.ListenAndServe(":3000", router)
+	http.ListenAndServe(port, router)
 
 }
